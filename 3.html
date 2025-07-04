@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="puzzle.css" />
+  <title></title>
+</head>
+<body>
+<h1>Puzzle 3</h1>
+<h2>Get past the traps (Hint, use the "WASD" keys)</h2>
+<div id="player"><div id="man"><img class="man" src="images/man.png" width="100px" height="100px"></div></div>
+<div id="hit"></div>
+  <div class="trap t1"></div>
+  <div class="trap t2"></div>
+  <div class="trap t3"></div>
+  <div class="trap t4"></div>
+  <div class="trap t5"></div>
+  <div class="trap t6"></div>
+  <div class="trap t7"></div>
+  <div class="trap t8"></div>
+  <div class="trap t9"></div>
+  <div class="trap t10"></div>
+<div id="goal" class="goal"></div>
+<script>
+  const player = document.getElementById("player");
+    let x = 100;
+    let y = 500;
+    const speed = 10 / 3;
+
+    document.addEventListener("keydown", (e) => {
+      switch (e.key.toLowerCase()) {
+        case "w":
+          y -= speed;
+          break;
+        case "a":
+          x -= speed;
+          break;
+        case "s":
+          y += speed;
+          break;
+        case "d":
+          x += speed;
+          break;
+        default:
+          return; // Ignore other keys
+      }
+      player.style.top = y + "px";
+      player.style.left = x + "px";
+    });
+
+  const man = document.getElementById("hit");
+  const traps = document.querySelectorAll(".trap");
+  const goals = document.querySelectorAll(".goal");
+
+  function movePlayer() {
+    man.style.top = y + "px";
+    man.style.left = x + "px";
+    checkTrapCollision();
+    checkGoalCollision();
+  }
+
+  function checkTrapCollision() {
+    const manRect = man.getBoundingClientRect();
+
+    for (const trap of traps) {
+      const trapRect = trap.getBoundingClientRect();
+
+      const isColliding = !(
+        manRect.right < trapRect.left ||
+        manRect.left > trapRect.right ||
+        manRect.bottom < trapRect.top ||
+        manRect.top > trapRect.bottom
+      );
+
+      if (isColliding) {
+        x = 100;
+        y = 500;
+        movePlayer();
+        alert("You fell for the trap!! Back to start.");
+        break;
+      }
+    }
+  }
+
+  function checkGoalCollision() {
+    const manRect = man.getBoundingClientRect();
+
+    for (const goal of goals) {
+      const goalRect = goal.getBoundingClientRect();
+
+      const isColliding = !(
+        manRect.right < goalRect.left ||
+        manRect.left > goalRect.right ||
+        manRect.bottom < goalRect.top ||
+        manRect.top > goalRect.bottom
+      );
+
+      if (isColliding) {
+        window.location.href = "4.html";
+        break;
+      }
+    }
+  }
+
+  document.addEventListener("keydown", (e) => {
+    switch (e.key.toLowerCase()) {
+      case "w":
+        y -= speed;
+        break;
+      case "a":
+        x -= speed;
+        break;
+      case "s":
+        y += speed;
+        break;
+      case "d":
+        x += speed;
+        break;
+      default:
+        return;
+    }
+    movePlayer();
+  });
+</script>
+</body>
+</html>
