@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="puzzle.css" />
+  <title></title>
+</head>
+<body>
+<h1>Puzzle 5</h1>
+<h2>Almost to the end (last puzzle)</h2>
+<h3>Solve the puzzle to get the final code</h3>
+<p>The code will be letters in the top left corner of the pieces. Once the puzzle is solved, input the letters in order, from left to right, top to bottom. Do NOT add spaces. Not every piece will have a letter.</p>
+<input id="code" type="text"> 
+<br>
+<input type="submit" onclick="checkInput()">
+<br>
+<div class="frame"></div>
+<div class="pieces">
+  <img src="images/pieces/1.png" style="top:10vh; left: 8vw;"> 
+  <img src="images/pieces/2.png" style="top:10vh; left: 86.5vw;"> 
+  <img src="images/pieces/3.png" style="top:37vh; left: 2vw;"> 
+  <img src="images/pieces/4.png" style="top:43vh; left: 8vw;"> 
+  <img src="images/pieces/5.png" style="top:48vh; left: 92.5vw;">
+  <img src="images/pieces/6.png" style="top:70vh; left: 2vw;"> 
+  <img src="images/pieces/7.png" style="top:15vh; left: 2vw;"> 
+  <img src="images/pieces/8.png" style="top:26vh; left: 92.5vw;"> 
+  <img src="images/pieces/9.png" style="top:32vh; left: 8vw;"> 
+  <img src="images/pieces/10.png" style="top:15vh; left: 92.5vw;">
+  <img src="images/pieces/11.png" style="top:21vh; left: 86.5vw;"> 
+  <img src="images/pieces/12.png" style="top:21vh; left: 8vw;"> 
+  <img src="images/pieces/13.png" style="top:59vh; left: 2vw;"> 
+  <img src="images/pieces/14.png" style="top:54vh; left: 86.5vw;"> 
+  <img src="images/pieces/15.png" style="top:76vh; left: 8vw;">
+  <img src="images/pieces/16.png" style="top:65vh; left: 86.5vw;"> 
+  <img src="images/pieces/17.png" style="top:65vh; left: 8vw;"> 
+  <img src="images/pieces/18.png" style="top:32vh; left: 86.5vw;"> 
+  <img src="images/pieces/19.png" style="top:26vh; left: 2vw;"> 
+  <img src="images/pieces/20.png" style="top:59vh; left: 92.5vw;">
+  <img src="images/pieces/21.png" style="top:48vh; left: 2vw;"> 
+  <img src="images/pieces/22.png" style="top:43vh; left: 86.5vw;"> 
+  <img src="images/pieces/23.png" style="top:70vh; left: 92.5vw;"> 
+  <img src="images/pieces/24.png" style="top:54vh; left: 8vw;"> 
+  <img src="images/pieces/25.png" style="top:37vh; left: 92.5vw;">
+</div>
+<script>
+    function checkInput() {
+      const input = document.getElementById("code").value.trim().toLowerCase();
+      const correctWord = "summerofmaking"; // Change this to your desired keyword
+
+      if (input === correctWord) {
+        window.location.href = "end.html"; // Replace with your target URL
+      } else {
+        alert("Incorrect word. Try again! Remember, no spaces, write the code left to right, top to bottom.");
+      }
+    }
+    const images = document.querySelectorAll('.pieces img');
+
+    images.forEach(img => {
+      let offsetX, offsetY, isDragging = false;
+
+      img.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - img.offsetLeft;
+        offsetY = e.clientY - img.offsetTop;
+        img.style.zIndex = 1000;
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          img.style.left = (e.clientX - offsetX) + 'px';
+          img.style.top = (e.clientY - offsetY) + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        img.style.zIndex = '';
+      });
+    });
+</script>
+</body>
+</html>
