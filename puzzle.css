@@ -119,21 +119,18 @@ a{
 .t9 { top: 200px; left: 0px; width: 2000px; height: 10px;}
 .t10 {top: 800px; left: 0px; width: 2000px; height: 10px;}
 
- #player {
-      width: 100px;
-      height: 100px;
-      background-color: transparent;
-      position: absolute;
-      top: 500px;
-      left: 100px;
-    }
+
 #hit {
       position: absolute;
       top: 500px;
       left: 100px;
       width: 60px;
-      height: 90px;
+      height: 100px;
       background-color: transparent;
+      background-image: url(images/man.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
  .trap {
       position: absolute;
